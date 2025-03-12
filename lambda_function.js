@@ -9,18 +9,18 @@ const TABLE_NAME = "SwordFightScores";
 async function getLeaderboard() {
     const params = {
         TableName: TABLE_NAME,
-        ProjectionExpression: "playerId, score",
-        Limit: 100
+        ProjectionExpression: "playerId, score, totalScore, gamesPlayed"
     };
     
     const command = new ScanCommand(params);
     const result = await dynamoDB.send(command);
     
-    const sortedItems = result.Items.sort((a, b) => b.score - a.score);
+    const sortedItems = result.Items.sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
     
     return sortedItems;
 }
 
+// add score to player's total score if playerID already exists
 async function updatePlayerScore(playerId, newScore) {
     const getParams = {
         TableName: TABLE_NAME,
@@ -30,17 +30,23 @@ async function updatePlayerScore(playerId, newScore) {
     const getCommand = new GetCommand(getParams);
     const existingRecord = await dynamoDB.send(getCommand);
     
-    // If player exists and new score is not higher, don't update
-    if (existingRecord.Item && existingRecord.Item.score >= newScore) {
-        console.log(`Player ${playerId} already has a higher score (${existingRecord.Item.score})`);
-        return;
+    let highestScore = newScore;
+    let totalScore = newScore;
+    let gamesPlayed = 1;
+    
+    if (existingRecord.Item) {
+        highestScore = Math.max(existingRecord.Item.score || 0, newScore);
+        totalScore = (existingRecord.Item.totalScore || 0) + newScore;
+        gamesPlayed = (existingRecord.Item.gamesPlayed || 0) + 1;
     }
     
     const putParams = {
         TableName: TABLE_NAME,
         Item: {
             playerId,
-            score: newScore,
+            score: highestScore,
+            totalScore: totalScore,
+            gamesPlayed: gamesPlayed,
             timestamp: new Date().toISOString()
         }
     };
@@ -49,7 +55,6 @@ async function updatePlayerScore(playerId, newScore) {
     return dynamoDB.send(putCommand);
 }
 
-// Main handler function
 exports.lambda_handler = async (event) => {
     try {
         console.log("Received event:", JSON.stringify(event));
@@ -60,7 +65,6 @@ exports.lambda_handler = async (event) => {
             "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
         };
         
-        // Handle OPTIONS request (preflight)
         if (event.httpMethod === 'OPTIONS') {
             return {
                 statusCode: 200,
@@ -92,7 +96,6 @@ exports.lambda_handler = async (event) => {
             };
         }
         
-        // POST request - submit score
         if (event.httpMethod === 'POST') {
             console.log("Processing POST request");
             
@@ -108,7 +111,6 @@ exports.lambda_handler = async (event) => {
                 };
             }
             
-            // Submit score
             console.log(`Updating score for player ${requestBody.playerId}: ${requestBody.score}`);
             await updatePlayerScore(requestBody.playerId, requestBody.score);
             console.log("Score updated successfully");

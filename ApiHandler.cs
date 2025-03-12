@@ -17,6 +17,8 @@ public class LeaderboardEntry
 {
     public string playerId;
     public int score;
+    public int totalScore;
+    public int gamesPlayed;
 }
 
 [System.Serializable]

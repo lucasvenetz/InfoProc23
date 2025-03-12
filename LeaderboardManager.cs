@@ -27,7 +27,20 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField]
     private int maxEntriesToShow = 10;
     
+    [SerializeField]
+    private TMP_Dropdown sortDropdown;
+    
     private List<GameObject> entryObjects = new List<GameObject>();
+    private LeaderboardEntry[] currentLeaderboardData;
+    
+    private enum SortType
+    {
+        TotalScore,
+        HighestScore,
+        MostGamesPlayed
+    }
+    
+    private SortType currentSortType = SortType.TotalScore;
     
     private void Start()
     {
@@ -36,7 +49,31 @@ public class LeaderboardManager : MonoBehaviour
             refreshButton.onClick.AddListener(FetchLeaderboard);
         }
         
+        if (sortDropdown != null)
+        {
+            sortDropdown.onValueChanged.AddListener(OnSortChanged);
+            
+            // Add options to the dropdown if they don't exist
+            if (sortDropdown.options.Count == 0)
+            {
+                sortDropdown.options.Add(new TMP_Dropdown.OptionData("Total Score"));
+                sortDropdown.options.Add(new TMP_Dropdown.OptionData("Highest Score"));
+                sortDropdown.options.Add(new TMP_Dropdown.OptionData("Most Games Played"));
+                sortDropdown.RefreshShownValue();
+            }
+        }
+        
         FetchLeaderboard();
+    }
+    
+    private void OnSortChanged(int index)
+    {
+        currentSortType = (SortType)index;
+        
+        if (currentLeaderboardData != null && currentLeaderboardData.Length > 0)
+        {
+            DisplayLeaderboard(currentLeaderboardData);
+        }
     }
     
     public void FetchLeaderboard()
@@ -67,7 +104,28 @@ public class LeaderboardManager : MonoBehaviour
             statusText.text = "";
         }
         
-        System.Array.Sort(leaderboardEntries, (a, b) => b.score.CompareTo(a.score));
+        currentLeaderboardData = leaderboardEntries;
+        
+        DisplayLeaderboard(leaderboardEntries);
+    }
+    
+    private void DisplayLeaderboard(LeaderboardEntry[] leaderboardEntries)
+    {
+        ClearLeaderboard();
+        
+        System.Array.Sort(leaderboardEntries, (a, b) => {
+            switch (currentSortType)
+            {
+                case SortType.TotalScore:
+                    return b.totalScore.CompareTo(a.totalScore);
+                case SortType.HighestScore:
+                    return b.score.CompareTo(a.score);
+                case SortType.MostGamesPlayed:
+                    return b.gamesPlayed.CompareTo(a.gamesPlayed);
+                default:
+                    return b.totalScore.CompareTo(a.totalScore);
+            }
+        });
         
         int entriesToShow = Mathf.Min(leaderboardEntries.Length, maxEntriesToShow);
         
@@ -88,25 +146,47 @@ public class LeaderboardManager : MonoBehaviour
         GameObject entryObject = Instantiate(leaderboardEntryPrefab, leaderboardContainer);
         entryObjects.Add(entryObject);
         
-        // Set rank
-        TextMeshProUGUI rankText = entryObject.transform.Find("RankText")?.GetComponent<TextMeshProUGUI>();
-        if (rankText != null)
+        LeaderboardEntryPrefab entryScript = entryObject.GetComponent<LeaderboardEntryPrefab>();
+        if (entryScript != null)
         {
-            rankText.text = rank.ToString();
+            entryScript.SetData(rank, entry);
         }
-        
-        // Set player ID
-        TextMeshProUGUI playerIdText = entryObject.transform.Find("PlayerIdText")?.GetComponent<TextMeshProUGUI>();
-        if (playerIdText != null)
+        else
         {
-            playerIdText.text = entry.playerId;
-        }
-        
-        // Set score
-        TextMeshProUGUI scoreText = entryObject.transform.Find("ScoreText")?.GetComponent<TextMeshProUGUI>();
-        if (scoreText != null)
-        {
-            scoreText.text = entry.score.ToString();
+            // just in case script isn't found
+            
+            TextMeshProUGUI rankText = entryObject.transform.Find("RankText")?.GetComponent<TextMeshProUGUI>();
+            if (rankText != null)
+            {
+                rankText.text = rank.ToString();
+            }
+            
+            TextMeshProUGUI playerIdText = entryObject.transform.Find("PlayerIdText")?.GetComponent<TextMeshProUGUI>();
+            if (playerIdText != null)
+            {
+                playerIdText.text = entry.playerId;
+            }
+            
+            // Set high score
+            TextMeshProUGUI highScoreText = entryObject.transform.Find("HighScoreText")?.GetComponent<TextMeshProUGUI>();
+            if (highScoreText != null)
+            {
+                highScoreText.text = entry.score.ToString();
+            }
+            
+            // Set total score
+            TextMeshProUGUI totalScoreText = entryObject.transform.Find("TotalScoreText")?.GetComponent<TextMeshProUGUI>();
+            if (totalScoreText != null)
+            {
+                totalScoreText.text = entry.totalScore.ToString();
+            }
+            
+            // Set games played
+            TextMeshProUGUI gamesPlayedText = entryObject.transform.Find("GamesPlayedText")?.GetComponent<TextMeshProUGUI>();
+            if (gamesPlayedText != null)
+            {
+                gamesPlayedText.text = entry.gamesPlayed.ToString();
+            }
         }
     }
     
@@ -120,14 +200,12 @@ public class LeaderboardManager : MonoBehaviour
         entryObjects.Clear();
     }
     
-    // Call this method to toggle the leaderboard visibility
     public void ToggleLeaderboard(bool show)
     {
         if (leaderboardPanel != null)
         {
             leaderboardPanel.SetActive(show);
             
-            // Refresh the data when showing the leaderboard
             if (show)
             {
                 FetchLeaderboard();
