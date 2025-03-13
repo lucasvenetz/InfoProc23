@@ -22,6 +22,9 @@ async function getLeaderboard() {
 
 // add score to player's total score if playerID already exists
 async function updatePlayerScore(playerId, newScore) {
+    const currentTime = Math.floor(Date.now() / 1000);
+    const timeLimit = 3600;
+
     const getParams = {
         TableName: TABLE_NAME,
         Key: { playerId }
@@ -39,16 +42,23 @@ async function updatePlayerScore(playerId, newScore) {
         totalScore = (existingRecord.Item.totalScore || 0) + newScore;
         gamesPlayed = (existingRecord.Item.gamesPlayed || 0) + 1;
     }
+
+    const updateItem = {
+        playerId,
+        score: highestScore,
+        totalScore: totalScore,
+        gamesPlayed: gamesPlayed,
+        timestamp: new Date().toISOString()
+    };
+
+    // TTL if score is zero - expire 1 hour
+    if (totalScore == 0) {
+        updateItem.ttl = currentTime + timeLimit; 
+    }
     
     const putParams = {
         TableName: TABLE_NAME,
-        Item: {
-            playerId,
-            score: highestScore,
-            totalScore: totalScore,
-            gamesPlayed: gamesPlayed,
-            timestamp: new Date().toISOString()
-        }
+        Item: updateItem
     };
     
     const putCommand = new PutCommand(putParams);
