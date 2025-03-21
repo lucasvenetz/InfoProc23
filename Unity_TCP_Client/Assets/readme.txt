@@ -1,1 +1,0 @@
-Replace this with the folder "Assets" in your unity project 
