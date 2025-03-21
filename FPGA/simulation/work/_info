@@ -1,0 +1,153 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vaccel_peripheral
+Z0 !s110 1741794152
+!i10b 1
+!s100 KJlE:3P<^lgUM8M<j6gHQ3
+I7SJEEnzAZZA53@7>?__JQ1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/Leeung/Projects/Information_Lab/ProjectSword/simulation
+w1741186082
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1741794152.000000
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v|
+!i113 1
+o-work work
+Z5 tCvgOpt 0
+vaccelerometer_top
+Z6 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z7 !s110 1741794151
+!i10b 1
+!s100 3F:l0lcXQVPA6T?]@Nn0o0
+IhWH1^eLo18;2EVkIC`oC?1
+R1
+!s105 accelerometer_top_sv_unit
+S1
+R2
+w1741793600
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_top.sv
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_top.sv
+L0 1
+R3
+r1
+!s85 0
+31
+Z8 !s108 1741794151.000000
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_top.sv|
+!i113 1
+Z9 o-work work -sv
+R5
+vFIR
+R6
+R0
+!i10b 1
+!s100 `fT?[9^2@XU^zA@n3`0Ec2
+I1BZOXJR:FfO`I75VFLDLK0
+R1
+!s105 FIR_sv_unit
+S1
+R2
+w1741709877
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv|
+!i113 1
+R9
+R5
+n@f@i@r
+vserdes_control
+R6
+R0
+!i10b 1
+!s100 aClJGO^8W2;cR<<DcZGEn3
+I8eRP^mNF98iWZMnj=glAg2
+R1
+!s105 serdes_control_sv_unit
+S1
+R2
+w1741660397
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv|
+!i113 1
+R9
+R5
+vspi_main
+R6
+R0
+!i10b 1
+!s100 0^^M3<G>Jj<5STMN[8GYd3
+Ih=2SBkPQmoDXSHa4Yi]ME2
+R1
+!s105 spi_main_sv_unit
+S1
+R2
+w1741657350
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv|
+!i113 1
+R9
+R5
+vtb_Sword_Game_top
+R6
+R7
+!i10b 1
+!s100 fd]UB=fVkU]zCH59QRMIb2
+IT<ISX=[=Q<dZYB[Xi9F@d1
+R1
+!s105 tb_Sword_Game_top_sv_unit
+S1
+R2
+w1741792964
+8C:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv
+FC:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv
+L0 3
+R3
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv|
+!i113 1
+R9
+R5
+ntb_@sword_@game_top

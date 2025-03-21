@@ -1,0 +1,18 @@
+Fitter Status : Successful - Fri Mar 21 17:51:09 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : Sword_Game_top
+Top-level Entity Name : accelerometer_top
+Family : MAX 10
+Device : 10M50DAF484C7G
+Timing Models : Final
+Total logic elements : 23,799 / 49,760 ( 48 % )
+    Total combinational functions : 22,946 / 49,760 ( 46 % )
+    Dedicated logic registers : 4,347 / 49,760 ( 9 % )
+Total registers : 4347
+Total pins : 79 / 360 ( 22 % )
+Total virtual pins : 0
+Total memory bits : 535,552 / 1,677,312 ( 32 % )
+Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 2 ( 0 % )

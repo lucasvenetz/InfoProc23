@@ -1,0 +1,22 @@
+
+State Machine - |accelerometer_top|CustomNIOS:u0|CustomNIOS_cpu:cpu|CustomNIOS_cpu_cpu:cpu|CustomNIOS_cpu_cpu_nios2_oci:the_CustomNIOS_cpu_cpu_nios2_oci|CustomNIOS_cpu_cpu_debug_slave_wrapper:the_CustomNIOS_cpu_cpu_debug_slave_wrapper|CustomNIOS_cpu_cpu_debug_slave_tck:the_CustomNIOS_cpu_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 
+
+State Machine - |accelerometer_top|spi_main:spi_controller|spi_state
+Name spi_state.IDLE spi_state.INTERACT spi_state.TRANSFER 
+spi_state.IDLE 0 0 0 
+spi_state.TRANSFER 1 0 1 
+spi_state.INTERACT 1 1 0 
+
+State Machine - |accelerometer_top|spi_main:spi_controller|serdes_control:serdes|current_state
+Name current_state.STALL current_state.READ current_state.WRITE current_state.IDLE 
+current_state.IDLE 0 0 0 0 
+current_state.WRITE 0 0 1 1 
+current_state.READ 0 1 0 1 
+current_state.STALL 1 0 0 1 

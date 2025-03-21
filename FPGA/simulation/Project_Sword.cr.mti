@@ -1,0 +1,36 @@
+C:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv {1 {vlog -work work -sv -stats=none C:/Users/Leeung/Projects/Information_Lab/ProjectSword/spi_main.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module spi_main
+
+Top level modules:
+	spi_main
+
+} {} {}} C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v {1 {vlog -work work -stats=none C:/Users/Leeung/Projects/Information_Lab/ProjectSword/accelerometer_avalon.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module accel_peripheral
+
+Top level modules:
+	accel_peripheral
+
+} {} {}} C:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv {1 {vlog -work work -sv -stats=none C:/Users/Leeung/Projects/Information_Lab/ProjectSword/FIR.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FIR
+
+Top level modules:
+	FIR
+
+} {} {}} C:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv {1 {vlog -work work -sv -stats=none C:/Users/Leeung/Projects/Information_Lab/ProjectSword/serdes_control.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module serdes_control
+
+Top level modules:
+	serdes_control
+
+} {} {}} C:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv {1 {vlog -work work -sv -stats=none C:/Users/Leeung/Projects/Information_Lab/ProjectSword/tb_Sword_Game_top.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module tb_Sword_Game_top
+
+Top level modules:
+	tb_Sword_Game_top
+
+} {} {}}
